@@ -1,0 +1,11 @@
+{
+  "name": "hapi-crudy",
+  "version": "1.0.0",
+  "description": "CRUD generator for hapi",
+  "main": "index.js",
+  "author": "Mario Ribeiro (mario@rasgo.cc)",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
