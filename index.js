@@ -21,11 +21,11 @@ function getCrudConfig(value) {
 
 exports = module.exports = (server, options) => {
   const basePath = options.path.slice(0, options.path.lastIndexOf("/"));
-  const slug = get(/\{(\w+)\}$/.exec(options.path), 1, null);
+  const permalink = get(/\{(\w+)\}$/.exec(options.path), 1, null);
 
-  const validatePayload = options.config.validate.payload;
   const validateAllParams = options.config.validate.params;
-  let validateCommonParams = omit(validateAllParams, slug);
+  let validateCommonParams = omit(validateAllParams, permalink);
+
   validateCommonParams = isEmpty(validateCommonParams)
     ? null
     : validateCommonParams;
@@ -34,6 +34,8 @@ exports = module.exports = (server, options) => {
     "method",
     "path",
     "handler",
+    "crudValidateCreate",
+    "crudValidateUpdate",
     "crudReadAll",
     "crudCreate",
     "crudRead",
@@ -73,7 +75,9 @@ exports = module.exports = (server, options) => {
       config: {
         validate: {
           params: validateCommonParams,
-          payload: validatePayload
+          payload: options.crudValidateCreate
+            ? options.crudValidateCreate
+            : options.config.validate.payload
         }
       }
     });
@@ -98,7 +102,9 @@ exports = module.exports = (server, options) => {
       config: {
         validate: {
           params: validateAllParams,
-          payload: validatePayload
+          payload: options.crudValidateUpdate
+            ? options.crudValidateUpdate
+            : options.config.validate.payload
         }
       }
     });
