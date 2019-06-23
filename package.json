@@ -1,6 +1,6 @@
 {
   "name": "hapi-crudy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "CRUD generator for hapi",
   "main": "index.js",
   "author": "Mario Ribeiro (mario@rasgo.cc)",
